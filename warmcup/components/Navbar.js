@@ -203,7 +203,7 @@ export default function Navbar() {
                     <Link
                       href="/contact"
                       onClick={() => setOpen(false)}
-                      className={`block w-full px-4 py-2 rounded-xl flex gap-3 items-center ${isActive("/contact") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
+                      className={`block w-full px-4 py-2 rounded-xl  gap-3 items-center ${isActive("/contact") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
                         }`}
                     >
                       <motion.div whileHover={{ rotate: 10 }}><FaPhoneAlt /></motion.div> Contact
