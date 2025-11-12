@@ -1,68 +1,171 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
+"use client";
+import React from "react";
+import { useRouter } from "next/navigation";
+import {
+  FaCoffee,
+  FaUsers,
+  FaBolt,
+  FaCode,
+  FaGift,
+  FaHeart,
+} from "react-icons/fa";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
-
     <>
-      <div className="flex justify-center items-center flex-col text-white h-[44vh] gap-4">
+      {/* 🌟 HERO SECTION */}
+      <section className="relative flex flex-col items-center justify-center text-center min-h-screen bg-gradient-to-br from-[#0a1120] via-[#0f1a30] to-[#0a0f1a] text-white px-6 overflow-hidden">
+        {/* subtle background pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#38bdf822,transparent_70%),radial-gradient(circle_at_bottom_right,#2563eb22,transparent_70%)]"></div>
 
-        <div className="flex gap-1 font-bold  text-5xl justify-center items-center cursor-pointer ">Buy Me A Chai
-          <span>
-            <img width={80} src="/Tea.gif" alt="" /></span>
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col items-center gap-6">
+          <h1 className="flex items-center gap-2 font-extrabold text-5xl md:text-7xl bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-[0_0_10px_#38bdf855]">
+            Buy Me A Chai
+            <img
+              src="/Tea.gif"
+              width={80}
+              alt="chai"
+              className="drop-shadow-[0_0_8px_#38bdf8]"
+            />
+          </h1>
+
+          <p className="text-gray-300 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed px-4">
+            Appreciate someone’s work? Buy them a chai ☕ to show your love and
+            support. Small gestures can create big inspiration ⚡
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
+            <button
+              onClick={() => router.push("/paymentpage")}
+              className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold px-6 py-3 md:px-8 md:py-4 rounded-full shadow-lg shadow-cyan-500/30 transition-all duration-300"
+            >
+              <FaCoffee /> Buy a Chai
+            </button>
+
+            <button
+              onClick={() => router.push("/about")}
+              className="flex items-center gap-2 border border-cyan-400/40 hover:bg-cyan-600/10 text-white font-medium px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300"
+            >
+              <FaBolt /> Learn More
+            </button>
+          </div>
         </div>
-        <p className="cursor-pointer">
-          Brought Chai For Me Give Donation As a Chai. Start Now ⚡
-        </p>
 
-        <div>
-          <button type="button" className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Sign Up</button>
+        {/* glowing orbs */}
+        <div className="absolute top-10 right-20 w-72 h-72 bg-blue-600 rounded-full blur-[120px] opacity-25 animate-pulse"></div>
+        <div className="absolute bottom-20 left-10 w-72 h-72 bg-cyan-500 rounded-full blur-[130px] opacity-25 animate-pulse"></div>
+      </section>
 
-          <button type="button" className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Read More</button>
-        </div>
-      </div>
+      {/* ✨ DIVIDER */}
+      <div className="bg-white h-[1px] opacity-10"></div>
 
-      <div className="bg-white h-1 opacity-10"></div>
+      {/* 🚀 FEATURES SECTION */}
+      <section className="text-white container mx-auto py-24 px-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-16 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          Why Get Me A Chai?
+        </h2>
 
-      <div className="text-white container mx-auto pb-32 pt-14">
-        <h1 className="text-2xl font-bold text-center mb-14">Buy Me A Chai</h1>
-        <div className="flex gap-5 justify-around">
-
-
-          <div className="item space-y-3 flex flex-col items-center justify-center">
-            <span >
-              <img className="bg-slate-600 rounded-full p-2 text-black" width={88} src="/CUP.png" alt="a" /></span>
-            <p className="font-bold ">Fans Want To Help</p>
-            <p className="text-center"> Your fans are Avaliable for you to help you </p>
+        <div className="grid gap-10 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+          {/* Card 1 */}
+          <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 hover:shadow-cyan-400/30 transition-all duration-300">
+            <FaUsers className="text-4xl text-cyan-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Connect With Fans</h3>
+            <p className="text-gray-300 text-sm">
+              Build genuine connections with your audience through meaningful
+              appreciation.
+            </p>
           </div>
 
-          <div className="item space-y-3 flex flex-col items-center justify-center">
-            <span >
-              <img className="bg-slate-600 rounded-full p-2  text-black" width={88} src="/coin.gif" alt="a" /></span>
-            <p className="font-bold ">Fans Want To Help</p>
-            <p className="text-center"> Your fans are Avaliable for you to help you </p>
+          {/* Card 2 */}
+          <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 hover:shadow-cyan-400/40 transition-all duration-300">
+            <img
+              src="/coin.gif"
+              alt="coins"
+              width={70}
+              className="mb-4 rounded-full bg-[#0a1a2f] p-2"
+            />
+            <h3 className="text-xl font-semibold mb-2">Instant Earnings</h3>
+            <p className="text-gray-300 text-sm">
+              Receive instant support from your followers with total
+              transparency and ease.
+            </p>
           </div>
 
-          <div className="item space-y-3 flex flex-col items-center justify-center">
-            <span >
-              <img className="bg-slate-600 rounded-full p-2 text-black" width={88} src="/Virat Kohli DP .jpeg" alt="a" /></span>
-            <p className="font-bold ">Fans Want To Help</p>
-            <p className="text-center"> Your fans are Avaliable for you to help you </p>
+          {/* Card 3 */}
+          <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 hover:shadow-blue-400/30 transition-all duration-300">
+            <FaCode className="text-4xl text-blue-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Built for Creators</h3>
+            <p className="text-gray-300 text-sm">
+              Perfect for developers, designers, and artists who want direct fan
+              engagement.
+            </p>
           </div>
-
         </div>
-      </div>
+      </section>
 
-      {/* Second Part */}
+      {/* ✨ DIVIDER */}
+      <div className="bg-white h-[1px] opacity-10"></div>
 
-      <div className="bg-white h-1 opacity-10"></div>
+      {/* 💎 SHOWCASE SECTION */}
+      <section className="text-white container mx-auto py-24 px-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-14 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          Join the Chai Community
+        </h2>
 
-      <div className="text-white container mx-auto pb-32 pt-14 flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold text-center mb-14">Learn About WEB Devlopment <p className="font-thin text-sm">It is Website Devlopmet Tool  </p>
-        </h1>
+        <div className="grid gap-10 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+          {/* Showcase Card 1 */}
+          <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 hover:shadow-cyan-400/30 transition-all duration-300">
+            <FaGift className="text-4xl text-cyan-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Support & Earn</h3>
+            <p className="text-gray-300 text-sm mb-4">
+              Receive gifts and appreciation directly from your supporters with
+              every donation.
+            </p>
+            <button
+              onClick={() => router.push("/paymentpage")}
+              className="mt-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-700 px-5 py-2 rounded-full font-semibold text-sm transition-all shadow-md shadow-cyan-400/30"
+            >
+              Start Now
+            </button>
+          </div>
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/XDINDHEXjJQ?si=fao42N-1a6e44xzW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
+          {/* Showcase Card 2 */}
+          <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 hover:shadow-blue-400/30 transition-all duration-300">
+            <FaHeart className="text-4xl text-blue-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Spread Kindness</h3>
+            <p className="text-gray-300 text-sm mb-4">
+              Every chai shared spreads positivity and warmth across creators
+              and fans.
+            </p>
+            <button
+              onClick={() => router.push("/about")}
+              className="mt-2 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 px-5 py-2 rounded-full font-semibold text-sm transition-all shadow-md shadow-blue-400/30"
+            >
+              Learn More
+            </button>
+          </div>
+
+          {/* Showcase Card 3 */}
+          <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 hover:shadow-cyan-400/30 transition-all duration-300">
+            <FaBolt className="text-4xl text-cyan-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Empower Creators</h3>
+            <p className="text-gray-300 text-sm mb-4">
+              Help creators stay motivated by fueling their creative energy with
+              your chai.
+            </p>
+            <button
+              onClick={() => router.push("/paymentpage")}
+              className="mt-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 px-5 py-2 rounded-full font-semibold text-sm transition-all shadow-md shadow-cyan-400/30"
+            >
+              Donate a Chai
+            </button>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

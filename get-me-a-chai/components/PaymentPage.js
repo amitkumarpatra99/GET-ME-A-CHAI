@@ -1,165 +1,138 @@
 /* eslint-disable @next/next/no-img-element */
-"use client"
+"use client";
 
-import React from 'react'
-import Script from 'next/script'
-import Razorpay from 'razorpay'
-import { initiate } from '@/action/useraction'
-import { useState } from 'react'
-import { useSession } from 'next-auth/react'
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { FaCreditCard } from "react-icons/fa";
 
-const PaymentPage = ({ username }) => {
+const PaymentPage = () => {
+  const username = "Amit Kumar Patra";
+  const [paymentform, setPaymentform] = useState({
+    name: "",
+    message: "",
+    amount: "",
+  });
 
-    const [paymentform, setpaymentform] = useState({})
-    const handleChange = (e) => {
-        setpaymentform({ ...paymentform, [e.target.name]: e.target.value })
+  const handleChange = (e) => {
+    setPaymentform({ ...paymentform, [e.target.name]: e.target.value });
+  };
 
+  const handleDirectPay = () => {
+    if (!paymentform.name || !paymentform.amount) {
+      alert("Please enter your name and amount before paying!");
+      return;
     }
 
-    const pay = async (amount) => {
-        let a = await initiate(amount, username, paymentform)
-        let orderId = a.id
+    // Redirect to Razorpay page
+    window.location.href = "https://pages.razorpay.com/amitpatra";
+  };
 
-        var option = {
-            "key": process.env.NEXT_PUBLIC_KEY_ID,
-            "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-            "currency": "INR",
-            "name": "Get Me A Chai", //your business name
-            "description": "Test Transaction",
-            "image": "https://example.com/your_logo",
-            "order_id": orderId,
-            "callback_url": `${process.env.NEXT_PUBLIC_URL}/api/razorpay`,
-            "prefill": {
-                "name": "Gaurav Kumar",
-                "email": "gaurav.kumar@example.com",
-                "contact": "9000090000"
-            },
-            "notes": {
-                "address": "Razorpay Corporate Office"
-            },
-            "theme": {
-                "color": "#3399cc"
-            }
-        }
+  return (
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#0a1120] via-[#0f1a30] to-[#0a0f1a] flex flex-col items-center justify-center text-white px-6 pt-28 pb-20">
+      {/* 🌟 Hero Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-10"
+      >
+        <h1 className="text-4xl md:text-5xl font-bold mb-3">
+          ☕ Support <span className="text-cyan-400">{username}</span>
+        </h1>
+        <p className="text-gray-300 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+          Love my work? Buy me a chai to keep me energized and motivated 💙  
+          Your support truly keeps creativity brewing.
+        </p>
+      </motion.div>
 
-        var rzp1 = new Razorpay(option);
-        document.getElementById('rzp-button1').onclick = function (e) {
-            rzp1.open();
+      {/* 💳 Payment Card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+        className="bg-white/10 backdrop-blur-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(56,189,248,0.15)] rounded-3xl p-6 sm:p-8 md:p-10 w-full max-w-md"
+      >
+        <div className="flex flex-col gap-5">
+          {/* 👤 Name */}
+          <div>
+            <label className="block text-sm text-gray-300 mb-1">
+              Your Name
+            </label>
+            <input
+              onChange={handleChange}
+              value={paymentform.name}
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              className="w-full px-4 py-3 rounded-lg bg-[#0b1a2a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
+            />
+          </div>
 
-        }
+          {/* 💬 Message */}
+          <div>
+            <label className="block text-sm text-gray-300 mb-1">
+              Message (optional)
+            </label>
+            <textarea
+              onChange={handleChange}
+              value={paymentform.message}
+              name="message"
+              placeholder="Say something nice..."
+              className="w-full px-4 py-3 rounded-lg bg-[#0b1a2a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none transition-all duration-200"
+              rows="3"
+            />
+          </div>
 
-    }
-    return (
-        <>
+          {/* 💰 Amount */}
+          <div>
+            <label className="block text-sm text-gray-300 mb-1">
+              Amount (in ₹)
+            </label>
+            <input
+              onChange={handleChange}
+              value={paymentform.amount}
+              type="number"
+              name="amount"
+              placeholder="Enter amount"
+              className="w-full px-4 py-3 rounded-lg bg-[#0b1a2a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
+            />
+          </div>
 
-            <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
+          {/* 🔘 Pay Now Button */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleDirectPay}
+            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-blue-600 hover:to-cyan-500 transition-all font-semibold text-lg py-3 rounded-xl shadow-lg shadow-cyan-400/30"
+          >
+            <FaCreditCard size={18} className="text-white" />
+            Pay Now
+          </motion.button>
 
-            <div className='cover w-full relative'>
-                <img className='object-cover w-full h-[400px]' src="/coffee.jpg" alt="" />
-                <div className='absolute -bottom-14 right-[45%]  '>
-                    <img className='w-[160px]  border-blue-500 border-2  rounded-full ' src="/Virat Kohli DP .jpeg" alt="" />
-                </div>
-            </div>
+          {/* ⚡ Quick Amount Buttons */}
+          <div className="flex justify-center flex-wrap gap-3 mt-4">
+            {[99, 199, 299, 499].map((amt) => (
+              <motion.button
+                key={amt}
+                whileHover={{ scale: 1.1 }}
+                onClick={() => {
+                  setPaymentform({ ...paymentform, amount: amt });
+                  handleDirectPay();
+                }}
+                className="px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-blue-700 hover:to-cyan-600 text-white font-medium transition-all shadow-md shadow-cyan-400/30"
+              >
+                ₹{amt}
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </motion.div>
 
-            <div className="info flex justify-center items-center flex-col gap-1 my-20">
+      {/* Decorative glowing blur elements */}
+      <div className="absolute top-20 right-24 w-64 h-64 bg-blue-600 rounded-full blur-[120px] opacity-25 animate-pulse"></div>
+      <div className="absolute bottom-20 left-20 w-64 h-64 bg-cyan-500 rounded-full blur-[130px] opacity-25 animate-pulse"></div>
+    </div>
+  );
+};
 
-                <div className="font-bold text-lg ">
-                    @{username}
-                </div>
-
-                <div className='text-slate-400'>
-                    Web Devlover
-                </div>
-                <div className='text-slate-400'>
-                    225 Members. 18 Post, ₹90000009/relese
-                </div>
-
-
-                <div className="payment flex gap-3 w-[80%]  mt-11  ">
-
-                    <div className="supporters w-1/2 bg-[#154e56df] p-10 text-lg rounded-xl ">
-                        {/* Show the list of the all the shuporters */}
-                        <h2 className='font-bold my-5 text-xl '>Supportors</h2>
-                        <ul className='mx-2 items-center'>
-
-                            <li className='my-4  flex gap-2 '>
-                                <img width={25} src="/avatar2.png" alt="a" />
-                                <span>  Ananya donated <span className='font-bold'> ₹2999 INR</span> with lots of  Support💙  </span>  </li>
-
-
-                            <li className='my-4  flex gap-2 '>
-                                <img width={25} src="/avatar2.png" alt="a" />
-                                <span>  Ananya donated <span className='font-bold'> ₹2000 INR</span>   </span>  </li>
-
-
-                            <li className='my-4  flex gap-2 '>
-                                <img width={25} src="/avatar2.png" alt="a" />
-                                <span>  Virat Kohli donated <span className='font-bold'> ₹50000000000000000000   </span>  </span>  </li>
-
-                            <li className='my-4  flex gap-2 '>
-                                <img width={25} src="/avatar2.png" alt="a" />
-                                <span>  Hemant donated <span className='font-bold'> ₹1499 INR</span>   </span>  </li>
-
-
-
-
-                            <li className='my-4  flex gap-2 '>
-                                <img width={25} src="/avatar2.png" alt="a" />
-                                <span>  Chanduu  donated <span className='font-bold'> ₹5000    </span>  With  Lots of ⚡ </span>  </li>
-
-
-                        </ul>
-                    </div>
-
-                    <div className="makePayment w-1/2 bg-[#154e56df] rounded-xl p-10 text-whte ">
-                        <h2 className='font-bold my-5 text-xl'>Make A Payment</h2>
-                        <div className="flex gap-2 flex-col items-center">
-
-                            <div className='w-full'>
-                                <input onChange={handleChange} value={paymentform.name} type="text" name='name' className='w-full p-3 rounded-lg bg-[#101D42]' placeholder='Enter Your ' />
-                            </div>
-                            <input onChange={handleChange} value={paymentform.message} type="text" name='message' className='w-full p-3 rounded-lg bg-[#101D42]' placeholder='Enter Your ' />
-                            <input onChange={handleChange} value={paymentform.amount} type="text" name='amount' className='w-full rounded-lg p-3 bg-[#101D42] ' placeholder='Enter Amount' />
-
-
-
-                            <button type="button" className="w-[150px] text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-2xl text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pay <a href="https://rzp.io/rzp/14SaJMx"></a></button>
-
-
-                        </div>
-
-                        <div className='flex gap-2 mt-5'>
-                            <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-                                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0" onClick={() => pay(1000)}>
-                                    Pay ₹99 INR
-                                </span>
-                            </button>
-
-                            <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-                                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0" onClick={() => pay(2000)}>
-                                    Pay ₹199 INR
-                                </span>
-                            </button>
-
-                            <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-                                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0" onClick={() => pay(3000)}>
-                                    Pay ₹299 INR
-                                </span>
-                            </button>
-
-                            <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-                                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0" onClick={() => pay(4000)}>
-                                    Pay ₹399 INR
-                                </span>
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </>
-    )
-}
-
-export default PaymentPage
+export default PaymentPage;

@@ -1,15 +1,13 @@
 import mongoose from "mongoose";
-const { Schema, model } = mongoose;
 
-const PaymentSchema = new Schema({
+const PaymentSchema = new mongoose.Schema(
+  {
     name: { type: String, required: true },
-    to_user: { type: String, required: true },
-    oid: { type: String, required: true },
-    message: { type: String, },
+    message: { type: String },
     amount: { type: Number, required: true },
-    createdAt: { type: Date, default: Date.now },
-    ubdatedAt: { type: Date, default: Date.now },
-    done: { type: Boolean, default: false }
-});
+    supporterEmail: { type: String },
+  },
+  { timestamps: true }
+);
 
-export default   mongoose.models.payment || model('payment', PaymentSchema);
+export default mongoose.models.Payment || mongoose.model("Payment", PaymentSchema);
