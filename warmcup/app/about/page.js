@@ -2,6 +2,8 @@
 import React from "react";
 import { FaUsers, FaHeart, FaCode, FaBolt } from "react-icons/fa";
 import Link from "next/link";
+import { Coffee } from "lucide-react";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -26,15 +28,18 @@ export default function About() {
 
         {/* Profile Image */}
         <div className="relative">
-          <img
+          <Image
             src="/DP.jpg"
             alt="Amit Kumar Patra"
+            width={256}
+            height={256}
             className="rounded-full w-64 h-64 object-cover border-4 border-cyan-400 shadow-[0_0_30px_#38bdf855]"
           />
           <div className="absolute -bottom-2 -right-2 bg-cyan-400 text-black text-xs px-3 py-1 rounded-full font-semibold">
             Creator
           </div>
         </div>
+
 
         {/* Info */}
         <div className="max-w-xl text-center md:text-left">
@@ -82,7 +87,7 @@ export default function About() {
 
         {/* Card 1 */}
         <div className="bg-white/10 border border-white/10 rounded-3xl p-8 text-center backdrop-blur-xl hover:scale-105 hover:shadow-cyan-500/30 transition-all duration-300">
-          <FaCoffee className="text-4xl mx-auto text-cyan-400 mb-4" />
+          <Coffee className="text-4xl mx-auto text-cyan-400 mb-4" />
           <h3 className="font-semibold text-xl mb-2 text-white">Send a Warm Cup</h3>
           <p className="text-gray-400 text-sm">
             Support creators instantly with a warm cup — a simple gesture with a powerful impact.

@@ -17,7 +17,6 @@ import {
   User2Icon,
   Coffee,
 } from "lucide-react";
-import { SiRazorpay } from "react-icons/si";
 import { LiaLinkedinIn } from "react-icons/lia";
 import { FaWhatsapp } from "react-icons/fa6";
 
