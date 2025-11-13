@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaCreditCard } from "react-icons/fa";
+import { FaCreditCard, FaCoffee } from "react-icons/fa";
 
 const PaymentPage = () => {
   const username = "Amit Kumar Patra";
@@ -29,6 +29,7 @@ const PaymentPage = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#0a1120] via-[#0f1a30] to-[#0a0f1a] flex flex-col items-center justify-center text-white px-6 pt-28 pb-20">
+
       {/* 🌟 Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -37,11 +38,13 @@ const PaymentPage = () => {
         className="text-center mb-10"
       >
         <h1 className="text-4xl md:text-5xl font-bold mb-3">
-          ☕ Support <span className="text-cyan-400">{username}</span>
+          ☕ Send a Warm Cup to  
+          <span className="text-cyan-400"> {username}</span>
         </h1>
+
         <p className="text-gray-300 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-          Love my work? Buy me a chai to keep me energized and motivated 💙  
-          Your support truly keeps creativity brewing.
+          Love the work? Fuel creativity with a warm cup ☕  
+          Your support means more than ever ✨
         </p>
       </motion.div>
 
@@ -53,6 +56,7 @@ const PaymentPage = () => {
         className="bg-white/10 backdrop-blur-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(56,189,248,0.15)] rounded-3xl p-6 sm:p-8 md:p-10 w-full max-w-md"
       >
         <div className="flex flex-col gap-5">
+
           {/* 👤 Name */}
           <div>
             <label className="block text-sm text-gray-300 mb-1">
@@ -77,7 +81,7 @@ const PaymentPage = () => {
               onChange={handleChange}
               value={paymentform.message}
               name="message"
-              placeholder="Say something nice..."
+              placeholder="Write a message..."
               className="w-full px-4 py-3 rounded-lg bg-[#0b1a2a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none transition-all duration-200"
               rows="3"
             />
@@ -86,7 +90,7 @@ const PaymentPage = () => {
           {/* 💰 Amount */}
           <div>
             <label className="block text-sm text-gray-300 mb-1">
-              Amount (in ₹)
+              Amount (₹)
             </label>
             <input
               onChange={handleChange}
@@ -106,7 +110,7 @@ const PaymentPage = () => {
             className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-blue-600 hover:to-cyan-500 transition-all font-semibold text-lg py-3 rounded-xl shadow-lg shadow-cyan-400/30"
           >
             <FaCreditCard size={18} className="text-white" />
-            Pay Now
+            Send Warm Cup 
           </motion.button>
 
           {/* ⚡ Quick Amount Buttons */}
@@ -128,7 +132,7 @@ const PaymentPage = () => {
         </div>
       </motion.div>
 
-      {/* Decorative glowing blur elements */}
+      {/* Glowing blur elements */}
       <div className="absolute top-20 right-24 w-64 h-64 bg-blue-600 rounded-full blur-[120px] opacity-25 animate-pulse"></div>
       <div className="absolute bottom-20 left-20 w-64 h-64 bg-cyan-500 rounded-full blur-[130px] opacity-25 animate-pulse"></div>
     </div>

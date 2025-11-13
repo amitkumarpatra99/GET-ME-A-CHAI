@@ -4,8 +4,11 @@ import Footer from "@/components/Footer";
 
 
 export const metadata = {
-  title: "Get Me A Chai",
-  description: "A website that You Give me fund for my Website platform Fees",
+  title: "Warm Cup",
+  description: "Support my work by gifting me a warm cup of happiness.",
+  icons: {
+    icon: "/favicon.png",
+  }
 };
 
 export default function RootLayout({ children }) {
@@ -13,13 +16,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
 
-          <Navbar />
-          <div className="min-h-screen [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] text-white">
-            {children}
-          </div>
-          <Footer />
-
-
+        <Navbar />
+        <div className="min-h-screen [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] text-white">
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
