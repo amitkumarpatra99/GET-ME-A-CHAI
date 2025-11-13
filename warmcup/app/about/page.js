@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { FaCoffee, FaUsers, FaHeart, FaCode, FaBolt } from "react-icons/fa";
+import { FaUsers, FaHeart, FaCode, FaBolt } from "react-icons/fa";
 import Link from "next/link";
 
 export default function About() {

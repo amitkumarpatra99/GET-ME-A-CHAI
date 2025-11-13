@@ -4,8 +4,9 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FaHome, FaInfoCircle, FaCoffee } from "react-icons/fa";
+import { FaHome, FaInfoCircle } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { Coffee } from "lucide-react";
 
 export default function Navbar() {
   const router = useRouter();
@@ -51,7 +52,7 @@ export default function Navbar() {
               <div className="text-white font-extrabold text-sm md:text-base tracking-wide">
                 ☕ WARM <span className="text-cyan-400">CUP</span>
               </div>
-              <div className="text-xs text-gray-300 hidden md:block">Warm support, one cup at a time</div>
+              <div className="text-xs ml-5 text-gray-300 m-0.5">by MR PATRA</div>
             </motion.div>
           </Link>
 
@@ -77,7 +78,7 @@ export default function Navbar() {
               onClick={() => router.push("/paymentpage")}
               className="flex items-center gap-2 text-sm font-semibold bg-gradient-to-r from-cyan-500/70 to-blue-500/60 text-white px-4 py-2 rounded-full shadow-md hover:scale-[1.02] transition"
             >
-              <motion.div whileHover={{ rotate: 10 }}><FaCoffee /></motion.div> Give a Cup
+              <motion.div whileHover={{ rotate: 10 }}><Coffee /></motion.div> Give a Cup
             </button>
           </div>
 
@@ -88,7 +89,7 @@ export default function Navbar() {
               onClick={() => router.push("/paymentpage")}
               className="p-2 rounded-md bg-cyan-600/10 text-cyan-300 border border-cyan-500/20 hover:bg-cyan-600/15 transition"
             >
-              <motion.div whileHover={{ rotate: 15 }}><FaCoffee /></motion.div>
+              <motion.div whileHover={{ rotate: 15 }}><Coffee /></motion.div>
             </button>
 
             {/* HAMBURGER */}
@@ -190,7 +191,7 @@ export default function Navbar() {
                       }}
                       className="w-full flex items-center gap-3 px-4 py-2 rounded-xl font-semibold bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:opacity-90 transition-all"
                     >
-                      <motion.div whileHover={{ rotate: 10 }}><FaCoffee /></motion.div> Give a Cup
+                      <motion.div whileHover={{ rotate: 10 }}><Coffee /></motion.div> Give a Cup
                     </button>
                   </li>
 

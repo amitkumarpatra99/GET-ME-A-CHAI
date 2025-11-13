@@ -15,11 +15,11 @@ import {
   Shield,
   RotateCcw,
   User2Icon,
+  Coffee,
 } from "lucide-react";
 import { SiRazorpay } from "react-icons/si";
 import { LiaLinkedinIn } from "react-icons/lia";
 import { FaWhatsapp } from "react-icons/fa6";
-import { FaCoffee } from "react-icons/fa";
 
 const Footer = () => {
   const icons = [
@@ -87,7 +87,7 @@ const Footer = () => {
         <div>
           <div className="flex items-center gap-2 mb-4 select-none">
             <div className="w-11 h-11 flex items-center justify-center rounded-full bg-white/10 border border-white/10 shadow-lg">
-              <FaCoffee size={22} className="text-cyan-400" />
+              <Coffee size={22} className="text-cyan-400" />
             </div>
             <h2 className="text-xl font-bold text-white tracking-wide">
               WARM <span className="text-cyan-400">CUP</span>

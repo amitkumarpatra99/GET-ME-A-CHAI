@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaCreditCard, FaCoffee } from "react-icons/fa";
+import { CreditCard } from "lucide-react";
 
 const PaymentPage = () => {
   const username = "Amit Kumar Patra";
@@ -38,7 +39,7 @@ const PaymentPage = () => {
         className="text-center mb-10"
       >
         <h1 className="text-4xl md:text-5xl font-bold mb-3">
-          ☕ Send a Warm Cup to  
+           Send a Warm Cup to  
           <span className="text-cyan-400"> {username}</span>
         </h1>
 
@@ -109,8 +110,8 @@ const PaymentPage = () => {
             onClick={handleDirectPay}
             className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-blue-600 hover:to-cyan-500 transition-all font-semibold text-lg py-3 rounded-xl shadow-lg shadow-cyan-400/30"
           >
-            <FaCreditCard size={18} className="text-white" />
-            Send Warm Cup 
+            <CreditCard size={18} className="text-white" />
+            PAY 
           </motion.button>
 
           {/* ⚡ Quick Amount Buttons */}

@@ -4,13 +4,14 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import {
-  FaCoffee,
   FaUsers,
   FaBolt,
   FaCode,
   FaGift,
   FaHeart,
 } from "react-icons/fa";
+import { Coffee, Coins, CoinsIcon } from "lucide-react";
+import { BiMoney } from "react-icons/bi";
 
 export default function Home() {
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function Home() {
                 border border-white/20
                 shadow-lg shadow-black/30"
               >
-                <FaCoffee size={50} className="text-white opacity-95" />
+                <Coffee size={50} className="text-white opacity-95" />
               </div>
             </h1>
 
@@ -70,7 +71,7 @@ export default function Home() {
                 rounded-full shadow-lg shadow-cyan-500/30 
                 transition-all duration-300"
               >
-                <FaCoffee /> Give a Cup
+                <Coffee /> Give a Cup
               </button>
 
               <button
@@ -122,7 +123,7 @@ export default function Home() {
 
             {/* Card 2 */}
             <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col items-center hover:scale-105 hover:shadow-cyan-400/40 transition-all duration-300">
-              <img src="/coin.gif" alt="coins" width={70} className="mb-4 rounded-full bg-[#0a1a2f] p-2" />
+              <BiMoney className="text-4xl text-teal-400 mb-4" />
               <h3 className="text-lg sm:text-xl font-semibold mb-2">Instant Earnings</h3>
               <p className="text-gray-300 text-sm sm:text-base text-center">
                 Receive instant support from your followers with total transparency.
@@ -134,7 +135,7 @@ export default function Home() {
               <FaCode className="text-4xl text-blue-400 mb-4" />
               <h3 className="text-lg sm:text-xl font-semibold mb-2">Built for Creators</h3>
               <p className="text-gray-300 text-sm sm:text-base text-center">
-                Perfect for developers, designers, and artists who want direct fan engagement.
+                Perfect for developers & designers who want direct fan engagement.
               </p>
             </div>
           </div>
@@ -185,7 +186,7 @@ export default function Home() {
               <FaBolt className="text-4xl text-cyan-400 mb-4" />
               <h3 className="text-lg sm:text-xl font-semibold mb-2">Empower Creators</h3>
               <p className="text-gray-300 text-sm sm:text-base text-center mb-4">
-                Help creators stay motivated by fueling their creativity with your support.
+                Help Developer and  stay motivated by fueling their creativity with your support.
               </p>
               <button
                 onClick={() => router.push("/paymentpage")}
