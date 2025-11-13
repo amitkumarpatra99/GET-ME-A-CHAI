@@ -14,6 +14,7 @@ import {
   FileText,
   Shield,
   RotateCcw,
+  User2Icon,
 } from "lucide-react";
 import { SiRazorpay } from "react-icons/si";
 import { LiaLinkedinIn } from "react-icons/lia";
@@ -22,6 +23,11 @@ import { FaCoffee } from "react-icons/fa";
 
 const Footer = () => {
   const icons = [
+      {
+      id: 0,
+      icon: <User2Icon size={18} />,
+      link: "https://mrpatra.vercel.app/",
+    },
     {
       id: 1,
       icon: <Github size={18} />,
@@ -42,11 +48,7 @@ const Footer = () => {
       icon: <Twitter size={18} />,
       link: "https://x.com/mr_patra_",
     },
-    {
-      id: 5,
-      icon: <SiRazorpay size={18} />,
-      link: "https://rzp.io/rzp/amitpatra",
-    },
+  
   ];
 
   const quickLinks = [

@@ -44,7 +44,7 @@ export default function Navbar() {
         className="mx-auto w-full max-w-6xl backdrop-blur-md bg-gradient-to-r from-slate-900/60 via-black/40 to-slate-900/40 border border-cyan-500/10 rounded-full px-4 md:px-6 py-3 shadow-lg shadow-cyan-800/20 transition-all"
       >
         <div className="flex items-center justify-between gap-4">
-          
+
           {/* BRAND */}
           <Link href="/" className="flex items-center gap-3 select-none" aria-label="Warm Cup - Home">
             <motion.div whileHover={{ scale: 1.05 }} className="leading-tight">
@@ -59,18 +59,16 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-6">
             <Link
               href="/"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors ${
-                isActive("/") ? "text-cyan-400" : "text-gray-200 hover:text-white"
-              }`}
+              className={`flex items-center gap-2 text-sm font-medium transition-colors ${isActive("/") ? "text-cyan-400" : "text-gray-200 hover:text-white"
+                }`}
             >
               <motion.div whileHover={{ rotate: 10 }}><FaHome /></motion.div> Home
             </Link>
 
             <Link
               href="/about"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors ${
-                isActive("/about") ? "text-cyan-400" : "text-gray-200 hover:text-white"
-              }`}
+              className={`flex items-center gap-2 text-sm font-medium transition-colors ${isActive("/about") ? "text-cyan-400" : "text-gray-200 hover:text-white"
+                }`}
             >
               <motion.div whileHover={{ rotate: 10 }}><FaInfoCircle /></motion.div> About
             </Link>
@@ -99,16 +97,52 @@ export default function Navbar() {
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((s) => !s)}
-              className="relative w-10 h-10 flex items-center justify-center rounded-full bg-white/4 backdrop-blur-sm border border-white/6 hover:scale-105 transition-transform"
+              className="relative w-10 h-10 flex items-center justify-center rounded-full 
+             bg-white/5 backdrop-blur-md border border-white/10 
+             hover:scale-105 transition-all"
             >
-              <span className="sr-only">Toggle menu</span>
-
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <motion.path d="M4 7H20" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" animate={open ? { rotate: 45, translateY: 6 } : { rotate: 0 }} />
-                <motion.path d="M4 12H20" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" animate={open ? { opacity: 0 } : { opacity: 1 }} />
-                <motion.path d="M4 17H20" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" animate={open ? { rotate: -45, translateY: -6 } : { rotate: 0 }} />
-              </svg>
+              <AnimatePresence mode="wait">
+                {!open ? (
+                  /* Smaller •••  Dots */
+                  <motion.div
+                    key="dots"
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.6 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-white"></span>
+                    <span className="w-1 h-1 rounded-full bg-white"></span>
+                    <span className="w-1 h-1 rounded-full bg-white"></span>
+                  </motion.div>
+                ) : (
+                  /* X icon */
+                  <motion.div
+                    key="close"
+                    initial={{ opacity: 0, rotate: -45, scale: 0.6 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    exit={{ opacity: 0, rotate: 45, scale: 0.6 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" stroke="white">
+                      <motion.path
+                        d="M6 6L18 18"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                      <motion.path
+                        d="M18 6L6 18"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </button>
+
+
           </div>
         </div>
 
@@ -130,9 +164,8 @@ export default function Navbar() {
                     <Link
                       href="/"
                       onClick={() => setOpen(false)}
-                      className={`block w-full px-4 py-2 rounded-xl flex gap-3 items-center ${
-                        isActive("/") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
-                      }`}
+                      className={`block w-full px-4 py-2 rounded-xl flex gap-3 items-center ${isActive("/") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
+                        }`}
                     >
                       <motion.div whileHover={{ rotate: 10 }}><FaHome /></motion.div> Home
                     </Link>
@@ -142,9 +175,8 @@ export default function Navbar() {
                     <Link
                       href="/about"
                       onClick={() => setOpen(false)}
-                      className={`block w-full px-4 py-2 rounded-xl flex gap-3 items-center ${
-                        isActive("/about") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
-                      }`}
+                      className={`block w-full px-4 py-2 rounded-xl flex gap-3 items-center ${isActive("/about") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
+                        }`}
                     >
                       <motion.div whileHover={{ rotate: 10 }}><FaInfoCircle /></motion.div> About
                     </Link>
