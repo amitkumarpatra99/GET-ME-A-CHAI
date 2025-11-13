@@ -47,8 +47,3 @@ Creators can receive support, display their work, and grow their community — o
 
 ---
 
-## 📂 Project Structure
-
-<p align="center">
-  <img src="public/banner.png" width="800" alt="Warm Cup Banner"/>
-</p>
