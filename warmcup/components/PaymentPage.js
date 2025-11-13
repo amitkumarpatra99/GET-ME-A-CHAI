@@ -3,7 +3,6 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaCreditCard, FaCoffee } from "react-icons/fa";
 import { CreditCard } from "lucide-react";
 
 const PaymentPage = () => {
@@ -24,12 +23,11 @@ const PaymentPage = () => {
       return;
     }
 
-    // Redirect to Razorpay page
     window.location.href = "https://pages.razorpay.com/amitpatra";
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#0a1120] via-[#0f1a30] to-[#0a0f1a] flex flex-col items-center justify-center text-white px-6 pt-28 pb-20">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#0a1120] via-[#0f1a30] to-[#0a0f1a] flex flex-col items-center justify-center text-white px-6 pt-28 pb-20 relative">
 
       {/* 🌟 Hero Section */}
       <motion.div
@@ -39,7 +37,7 @@ const PaymentPage = () => {
         className="text-center mb-10"
       >
         <h1 className="text-4xl md:text-5xl font-bold mb-3">
-           Send a Warm Cup to  
+          Send a Warm Cup to  
           <span className="text-cyan-400"> {username}</span>
         </h1>
 
@@ -54,15 +52,13 @@ const PaymentPage = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
-        className="bg-white/10 backdrop-blur-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(56,189,248,0.15)] rounded-3xl p-6 sm:p-8 md:p-10 w-full max-w-md"
+        className="relative z-10 bg-white/10 backdrop-blur-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(56,189,248,0.15)] rounded-3xl p-6 sm:p-8 md:p-10 w-full max-w-md"
       >
         <div className="flex flex-col gap-5">
 
           {/* 👤 Name */}
           <div>
-            <label className="block text-sm text-gray-300 mb-1">
-              Your Name
-            </label>
+            <label className="block text-sm text-gray-300 mb-1">Your Name</label>
             <input
               onChange={handleChange}
               value={paymentform.name}
@@ -75,9 +71,7 @@ const PaymentPage = () => {
 
           {/* 💬 Message */}
           <div>
-            <label className="block text-sm text-gray-300 mb-1">
-              Message (optional)
-            </label>
+            <label className="block text-sm text-gray-300 mb-1">Message (optional)</label>
             <textarea
               onChange={handleChange}
               value={paymentform.message}
@@ -90,9 +84,7 @@ const PaymentPage = () => {
 
           {/* 💰 Amount */}
           <div>
-            <label className="block text-sm text-gray-300 mb-1">
-              Amount (₹)
-            </label>
+            <label className="block text-sm text-gray-300 mb-1">Amount (₹)</label>
             <input
               onChange={handleChange}
               value={paymentform.amount}
@@ -133,9 +125,10 @@ const PaymentPage = () => {
         </div>
       </motion.div>
 
-      {/* Glowing blur elements */}
-      <div className="absolute top-20 right-24 w-64 h-64 bg-blue-600 rounded-full blur-[120px] opacity-25 animate-pulse"></div>
-      <div className="absolute bottom-20 left-20 w-64 h-64 bg-cyan-500 rounded-full blur-[130px] opacity-25 animate-pulse"></div>
+      {/* Glowing blur elements FIXED ✔ */}
+      <div className="pointer-events-none absolute top-20 right-24 w-64 h-64 bg-blue-600 rounded-full blur-[120px] opacity-25 animate-pulse"></div>
+      <div className="pointer-events-none absolute bottom-20 left-20 w-64 h-64 bg-cyan-500 rounded-full blur-[130px] opacity-25 animate-pulse"></div>
+
     </div>
   );
 };
