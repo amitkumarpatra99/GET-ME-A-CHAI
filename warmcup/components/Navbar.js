@@ -8,13 +8,21 @@ import { FaHome, FaInfoCircle, FaPhoneAlt, FaImages } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { Coffee } from "lucide-react";
 
+const NAV_ITEMS = [
+  { href: "/", label: "Home", icon: FaHome },
+  { href: "/about", label: "About", icon: FaInfoCircle },
+  { href: "/contact", label: "Contact", icon: FaPhoneAlt },
+  { href: "/gallery", label: "Gallery", icon: FaImages },
+];
+
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [hoveredPath, setHoveredPath] = useState(null);
 
-  // sticky hide/show on scroll
+  // Sticky hide/show on scroll
   useEffect(() => {
     let lastY = window.scrollY;
     const handleScroll = () => {
@@ -27,7 +35,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // close mobile menu on route change
+  // Close mobile menu on route change
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -36,130 +44,101 @@ export default function Navbar() {
 
   return (
     <motion.header
-      animate={{ y: hidden ? -100 : 0 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="fixed inset-x-4 md:inset-x-12 top-4 z-50 pointer-events-auto"
+      animate={{ y: hidden ? -110 : 0 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed inset-x-4 md:inset-x-12 top-6 z-50 pointer-events-auto"
     >
       <nav
         aria-label="Primary"
-        className="mx-auto w-full max-w-6xl backdrop-blur-md bg-gradient-to-r from-slate-900/60 via-black/40 to-slate-900/40 border border-cyan-500/10 rounded-full px-4 md:px-6 py-3 shadow-lg shadow-cyan-800/20 transition-all"
+        className="mx-auto w-full max-w-5xl backdrop-blur-xl bg-slate-950/70 border border-slate-800/60 rounded-full px-4 md:px-6 py-2.5 shadow-2xl shadow-black/40 transition-all"
       >
         <div className="flex items-center justify-between gap-4">
-
+          
           {/* BRAND */}
-          <Link href="/" className="flex items-center gap-3 select-none" aria-label="Warm Cup - Home">
-            <motion.div whileHover={{ scale: 1.05 }} className="leading-tight">
-              <div className="text-white font-extrabold text-sm md:text-base tracking-wide">
-                ☕ WARM <span className="text-cyan-400">CUP</span>
+          <Link href="/" className="flex items-center gap-2 select-none group" aria-label="Warm Cup - Home">
+            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300">
+              <Coffee className="w-5 h-5" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-white font-black text-sm md:text-base tracking-wider uppercase">
+                Warm <span className="text-cyan-400 font-bold">Cup</span>
               </div>
-              <div className="text-xs ml-5 text-gray-300 m-0.5">by MR PATRA</div>
-            </motion.div>
+              <div className="text-[10px] text-slate-400 font-medium tracking-tight">by MR PATRA</div>
+            </div>
           </Link>
 
           {/* DESKTOP LINKS */}
-          <div className="hidden md:flex items-center gap-6">
-            <Link
-              href="/"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors ${isActive("/") ? "text-cyan-400" : "text-gray-200 hover:text-white"
-                }`}
-            >
-              <motion.div whileHover={{ rotate: 10 }}><FaHome /></motion.div> Home
-            </Link>
+          <div 
+            className="hidden md:flex items-center gap-1 relative"
+            onMouseLeave={() => setHoveredPath(null)}
+          >
+            {NAV_ITEMS.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onMouseEnter={() => setHoveredPath(item.href)}
+                  className={`relative px-4 py-2 flex items-center gap-2 text-sm font-medium rounded-full transition-colors duration-300 z-10 ${
+                    active ? "text-cyan-400" : "text-slate-300 hover:text-white"
+                  }`}
+                >
+                  <item.icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                  
+                  {/* Sliding Hover Background */}
+                  {hoveredPath === item.href && (
+                    <motion.div
+                      layoutId="nav-hover-bg"
+                      className="absolute inset-0 bg-slate-800/50 rounded-full -z-10"
+                      transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                    />
+                  )}
+                  
+                  {/* Underline for Active Item */}
+                  {active && (
+                    <motion.div 
+                      layoutId="nav-active-line"
+                      className="absolute bottom-0 left-4 right-4 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" 
+                    />
+                  )}
+                </Link>
+              );
+            })}
 
-            <Link
-              href="/about"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors ${isActive("/about") ? "text-cyan-400" : "text-gray-200 hover:text-white"
-                }`}
-            >
-              <motion.div whileHover={{ rotate: 10 }}><FaInfoCircle /></motion.div> About
-            </Link>
-
-            <Link
-              href="/contact"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors ${isActive("/contact") ? "text-cyan-400" : "text-gray-200 hover:text-white"
-                }`}
-            >
-              <motion.div whileHover={{ rotate: 10 }}><FaPhoneAlt /></motion.div> Contact
-            </Link>
-
-            <Link
-              href="/gallery"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors ${isActive("/gallery") ? "text-cyan-400" : "text-gray-200 hover:text-white"
-                }`}
-            >
-              <motion.div whileHover={{ rotate: 10 }}><FaImages /></motion.div> Gallery
-            </Link>
+            <div className="h-5 w-[1px] bg-slate-800 mx-2" />
 
             <button
               onClick={() => router.push("/paymentpage")}
-              className="flex items-center gap-2 text-sm font-semibold bg-gradient-to-r from-cyan-500/70 to-blue-500/60 text-white px-4 py-2 rounded-full shadow-md hover:scale-[1.02] transition"
+              className="group flex items-center gap-2 text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-5 py-2 rounded-full shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all duration-300 active:scale-95"
             >
-              <motion.div whileHover={{ rotate: 10 }}><Coffee /></motion.div> Give a Cup
+              <Coffee className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+              <span>Give a Cup</span>
             </button>
           </div>
 
           {/* MOBILE ACTIONS */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="md:hidden flex items-center gap-2">
             <button
               aria-label="Donate"
               onClick={() => router.push("/paymentpage")}
-              className="p-2 rounded-md bg-cyan-600/10 text-cyan-300 border border-cyan-500/20 hover:bg-cyan-600/15 transition"
+              className="p-2.5 rounded-full bg-slate-900 border border-slate-800 text-cyan-400 hover:bg-slate-800 transition active:scale-95"
             >
-              <motion.div whileHover={{ rotate: 15 }}><Coffee /></motion.div>
+              <Coffee className="w-[18px] h-[18px]" />
             </button>
 
-            {/* HAMBURGER */}
+            {/* MORPHING HAMBURGER */}
             <button
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((s) => !s)}
-              className="relative w-10 h-10 flex items-center justify-center rounded-full 
-             bg-white/5 backdrop-blur-md border border-white/10 
-             hover:scale-105 transition-all"
+              className="w-10 h-10 flex flex-col items-center justify-center gap-[5px] rounded-full bg-slate-900 border border-slate-800 transition-colors"
             >
-              <AnimatePresence mode="wait">
-                {!open ? (
-                  /* Smaller •••  Dots */
-                  <motion.div
-                    key="dots"
-                    initial={{ opacity: 0, scale: 0.6 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.6 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex flex-col items-center justify-center gap-1"
-                  >
-                    <span className="w-1 h-1 rounded-full bg-white"></span>
-                    <span className="w-1 h-1 rounded-full bg-white"></span>
-                    <span className="w-1 h-1 rounded-full bg-white"></span>
-                  </motion.div>
-                ) : (
-                  /* X icon */
-                  <motion.div
-                    key="close"
-                    initial={{ opacity: 0, rotate: -45, scale: 0.6 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    exit={{ opacity: 0, rotate: 45, scale: 0.6 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" stroke="white">
-                      <motion.path
-                        d="M6 6L18 18"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <motion.path
-                        d="M18 6L6 18"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <span className={`w-5 h-[2px] bg-white rounded-full transition-all duration-300 ease-in-out ${open ? "rotate-45 translate-y-[7px]" : ""}`} />
+              <span className={`w-5 h-[2px] bg-white rounded-full transition-all duration-300 ease-in-out ${open ? "opacity-0" : ""}`} />
+              <span className={`w-5 h-[2px] bg-white rounded-full transition-all duration-300 ease-in-out ${open ? "-rotate-45 -translate-y-[7px]" : ""}`} />
             </button>
-
-
           </div>
         </div>
 
@@ -168,71 +147,46 @@ export default function Navbar() {
           {open && (
             <motion.div
               id="mobile-menu"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ type: "spring", stiffness: 250, damping: 30 }}
-              className="absolute left-0 right-0 mt-3 md:hidden px-4"
+              initial={{ opacity: 0, scale: 0.96, y: -4 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: -4 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="absolute left-0 right-0 mt-4 md:hidden"
             >
-              <div className="rounded-2xl bg-gradient-to-br from-black/80 to-slate-900/80 border border-cyan-500/10 p-4 shadow-xl backdrop-blur-xl">
-                <ul className="flex flex-col gap-4">
+              <div className="rounded-2xl bg-slate-950/95 border border-slate-800/80 p-3 shadow-2xl backdrop-blur-2xl mx-1">
+                <ul className="flex flex-col gap-1">
+                  {NAV_ITEMS.map((item) => {
+                    const active = isActive(item.href);
+                    return (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                          className={`w-full px-4 py-3 rounded-xl flex gap-3 items-center text-sm font-medium transition-all ${
+                            active 
+                              ? "bg-gradient-to-r from-cyan-500/10 to-blue-500/10 text-cyan-400 border-l-2 border-cyan-400" 
+                              : "text-slate-300 hover:bg-slate-900"
+                          }`}
+                        >
+                          <item.icon className="w-[18px] h-[18px]" />
+                          <span>{item.label}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
 
-                  <li>
-                    <Link
-                      href="/"
-                      onClick={() => setOpen(false)}
-                      className={`block w-full px-4 py-2 rounded-xl flex gap-3 items-center ${isActive("/") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
-                        }`}
-                    >
-                      <motion.div whileHover={{ rotate: 10 }}><FaHome /></motion.div> Home
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      href="/about"
-                      onClick={() => setOpen(false)}
-                      className={`block w-full px-4 py-2 rounded-xl flex gap-3 items-center ${isActive("/about") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
-                        }`}
-                    >
-                      <motion.div whileHover={{ rotate: 10 }}><FaInfoCircle /></motion.div> About
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      href="/contact"
-                      onClick={() => setOpen(false)}
-                      className={`block w-full px-4 py-2 rounded-xl flex gap-3 items-center ${isActive("/contact") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
-                        }`}
-                    >
-                      <motion.div whileHover={{ rotate: 10 }}><FaPhoneAlt /></motion.div> Contact
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      href="/gallery"
-                      onClick={() => setOpen(false)}
-                      className={`block w-full px-4 py-2 rounded-xl flex gap-3 items-center ${isActive("/gallery") ? "bg-white/10 text-cyan-400" : "text-gray-200 hover:bg-white/10"
-                        }`}
-                    >
-                      <motion.div whileHover={{ rotate: 10 }}><FaImages /></motion.div> Gallery
-                    </Link>
-                  </li>
-
-                  <li>
+                  <li className="pt-2 mt-1 border-t border-slate-900">
                     <button
                       onClick={() => {
                         router.push("/paymentpage");
                         setOpen(false);
                       }}
-                      className="w-full flex items-center gap-3 px-4 py-2 rounded-xl font-semibold bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:opacity-90 transition-all"
+                      className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/10 transition-all"
                     >
-                      <motion.div whileHover={{ rotate: 10 }}><Coffee /></motion.div> Give a Cup
+                      <Coffee className="w-4 h-4" />
+                      <span>Give a Cup</span>
                     </button>
                   </li>
-
                 </ul>
               </div>
             </motion.div>
