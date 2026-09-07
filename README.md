@@ -9,7 +9,7 @@ Creators can showcase their work, answer questions, and receive direct support�
 
 ---
 
-## 🚀 Features
+## 🚀 Feature
 
 ### 🌟 Core Experience
 - **Premium UI**: Stunning dark mode with glassmorphism effects and smooth gradients.
